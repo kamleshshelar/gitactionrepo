@@ -1,6 +1,6 @@
 name: Greet EveryOne
 
-on:[push]
+on: [push]
 
 jobs:
   build:
