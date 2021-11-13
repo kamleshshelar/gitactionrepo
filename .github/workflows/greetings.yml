@@ -1,16 +1,18 @@
-name: Greet EveryOne
+name: Docker Image CI
 
-on: [push]
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
+
   build:
-    name: Greeting
+
     runs-on: ubuntu-latest
+
     steps:
-      -name: Hello World
-       uses: actions/hello-world-javascript-action@v1
-       with:
-         who-to-greet: 'Mona the Octocat'
-       id: hello
-      -name: Echo the greeting's name 
-       run: echo 'the time was ${{steps.hello.outputs.time}}.'
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
